@@ -6,6 +6,7 @@ import {
   FORMULA_RESULT_TYPE,
   SELECT_OPTION_COLORS,
   TABLE_PERMISSION_TYPE,
+  COLUMN_BUTTON_STATUS,
   formatDurationToNumber,
 } from 'dtable-store';
 import StatUtils from './stat-utils';
@@ -17,7 +18,8 @@ export {
   COLUMNS_ICON_CONFIG, 
   FORMULA_RESULT_TYPE,
   SELECT_OPTION_COLORS,
-  TABLE_PERMISSION_TYPE, 
+  TABLE_PERMISSION_TYPE,
+  COLUMN_BUTTON_STATUS, 
   formatDurationToNumber,
   StatUtils, 
 };
