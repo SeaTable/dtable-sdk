@@ -56,10 +56,28 @@ class DTable {
 
   }
 
+  initRelatedUsers = async () => {
+    // init dtable collaborators
+    const res = await this.dtableServerAPI.getTableRelatedUsers();
+    if (res && res.data) {
+      const { user_list, app_user_list } = res.data;
+      this.dtableStore.initRelatedUsers({ user_list, app_user_list });
+    }
+  };
+
+  initDepartments = async () => {
+    // init dtable departments
+    const res = await this.dtableServerAPI.getTableDepartments();
+    if (res && res.data) {
+      const { departments } = res.data;
+      this.dtableStore.initDepartments(departments);
+    }
+  };
+
   async syncWithServer() {
     await this.dtableStore.loadDTable();
-    await this.dtableStore.loadRelatedUsers();
-    await this.dtableStore.loadTableDepartments();
+    await this.initRelatedUsers();
+    await this.initDepartments();
     this.dtableStore.syncWithServer();
     this.updateDTableAccessToken();
   }
@@ -96,8 +114,8 @@ class DTable {
         if (err) {
           callback(err);
         } else {
-          let headers = Object.assign({'Content-Length': length}, formData.getHeaders());
-          axios.post(uploadLink, formData, { headers: headers}).then(res => {
+          let headers = Object.assign({ 'Content-Length': length }, formData.getHeaders());
+          axios.post(uploadLink, formData, { headers: headers }).then(res => {
             // add file url
             let fileInfo = res.data[0];
             let { server, workspaceID } = this.config;
@@ -173,7 +191,7 @@ class DTable {
   }
 
   addView(tableName, viewName) {
-    const viewData = { name: viewName, type: 'table'};
+    const viewData = { name: viewName, type: 'table' };
     const tables = this.getTables();
     const index = tables.findIndex((table) => {
       return table.name === tableName

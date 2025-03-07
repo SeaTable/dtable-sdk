@@ -3,7 +3,7 @@ class Utils {
   formatDate(date) {
     return this._formatDate(date);
   }
-  
+
   formatDateWithMinutes(date) {
     return this._formatDate(date, true);
   }
@@ -15,7 +15,7 @@ class Utils {
 
         let year = newDate.getFullYear();
         if (String(year).length !== 4) {
-          return 'Invaild date';
+          return 'Invalid date';
         };
 
         let month = newDate.getMonth() + 1;
@@ -24,7 +24,7 @@ class Utils {
         let hour = newDate.getHours();
 
         month = month < 10 ? `0${month}` : month;
-        date = date < 10 ? `0${date}` : date; 
+        date = date < 10 ? `0${date}` : date;
         hour = hour < 10 ? `0${hour}` : hour;
         minute = minute < 10 ? `0${minute}` : minute;
 

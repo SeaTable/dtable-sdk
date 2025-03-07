@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class DTableWebAPI {
-  
+
   constructor(config) {
     this.config = config;
     this.req = axios.create();
@@ -26,7 +26,7 @@ class DTableWebAPI {
     const { server, APIToken } = this.config;
     const url = server + '/api/v2.1/dtable/app-access-token/';
     const headers = { 'Authorization': 'Token ' + APIToken };
-    return this.req.get(url, { headers:  headers });
+    return this.req.get(url, { headers: headers });
   }
 
   getFileUploadLink() {
@@ -66,13 +66,13 @@ class DTableWebAPI {
     let params = {
       avatar_size: avatarSize
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   addConvertPageTask(workspaceId, dtableName, params) {
     const { server } = this.config;
     const url = server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/convert-page/';
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   cancelDTableIOTask(taskId, dtable_uuid, task_type) {
@@ -83,7 +83,7 @@ class DTableWebAPI {
       dtable_uuid: dtable_uuid,
       task_type: task_type
     };
-    return this.req.delete(url, {params: params});
+    return this.req.delete(url, { params: params });
   }
 
   queryDTableIOStatusByTaskId(taskId) {
